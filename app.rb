@@ -38,3 +38,15 @@ post("/projects/:id") do
   @project = Project.find(params.fetch("id").to_i())
   erb(:project)
 end
+
+get("/project/:id/edit") do
+  @project = Project.find(params.fetch("id").to_i())
+  erb(:project_edit)
+end
+
+patch("/project/:id/edit") do
+  title = params.fetch("title")
+  @project = Project.find(params.fetch("id").to_i())
+  @project.update({:title => title})
+  redirect('/')
+end

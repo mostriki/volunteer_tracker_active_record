@@ -1,11 +1,11 @@
-<h1><%= @project.name() %></h1>
+<h1><%= @project.title() %></h1>
 
 <% if @project.volunteers().any?() %>
-  <h3>Here are all the volunteers for this project:</h3>
+  <h3>Here are the volunteers on this project:</h3>
 
   <ul>
     <% @project.volunteers().each() do |volunteer| %>
-      <li><%= volunteer.name() %> </li>
+      <li><a href="/volunteers/<%= volunteer.id()%>"><%= volunteer.name() %></a></li>
     <% end %>
   </ul>
 
@@ -24,6 +24,6 @@
   <button type="submit" class="btn btn-info">Update Volunteer</button>
 </form><br>
 
-<div class="container">
-  <a href="/"><button class="btn btn-info">Home</a>
-</div>
+<p><a href="/project/<%= @project.id() %>/edit">Edit Project</a></p>
+
+<p><a href="/">Home</a></p>

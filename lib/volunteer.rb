@@ -43,4 +43,8 @@ class Volunteer
     end
     found_volunteer
   end
+
+  def delete
+    DB.exec("DELETE FROM volunteers WHERE id = #{self.id()};")
+  end
 end
