@@ -1,0 +1,26 @@
+<h1>Volunteer Project Form</h1>
+
+<form class="projectForm" action="/projects" method="post">
+  <div class="form-group">
+    <label for="title">Create a new project:</label>
+    <input type="text" name="title" required>
+  </div>
+
+  <button type="submit" class="btn btn-info">Create Project</button>
+</form>
+
+<h1>Active Projects</h1>
+
+<% if @projects.any?() %>
+
+<h3>Click on a project to add, update, or delete it.</h3>
+
+  <ul>
+    <% @projects.each() do |project| %>
+      <li><a href="/projects/<%= project.id()%>"><%= project.title() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+    <p>There are no projects yet!</p>
+<% end %>
