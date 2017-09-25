@@ -25,6 +25,17 @@ class Volunteer
     Volunteer.new({:name => name, :project_id => project_id, :id => id})
   end
 
+  def projects
+    volunteer_projects = []
+    projects = DB.exec("SELECT * FROM projects WHERE id = #{self.id};")
+    projects.each do |project|
+      title = project.fetch("title")
+      id = project.fetch("id").to_i
+      volunteer_projects.push(Project.new({title: title, id: id}))
+    end
+    volunteer_projects
+  end
+
   def save
     result = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', '#{@project_id}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
@@ -42,6 +53,11 @@ class Volunteer
       end
     end
     found_volunteer
+  end
+
+  def update(attributes)
+    @name = attributes.fetch(:name, @name)
+    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{self.id};")
   end
 
   def delete

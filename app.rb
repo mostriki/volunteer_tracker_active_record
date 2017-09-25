@@ -57,3 +57,35 @@ delete("/projects/:id/edit") do
   @projects = Project.all()
   redirect('/')
 end
+
+get("/volunteers/:id") do
+  @volunteers = Volunteer.all
+  @volunteer = Volunteer.find(params.fetch("id").to_i())
+  erb(:volunteer)
+end
+
+post("/volunteers/:id") do
+  title = params['title']
+  project_id = params[:id]
+
+  project = Project.new({name: name, id: nil})
+  project.save
+
+  @volunteers = Volunteer.all
+  @volunteer = Volunteer.find(params.fetch("id").to_i())
+  erb(:volunteer)
+end
+
+patch("/volunteers/:id") do
+  name = params.fetch("name")
+  @volunteer = Volunteer.find(params.fetch("id").to_i())
+  @volunteer.update({:name => name})
+  redirect('/')
+end
+
+delete("/volunteers/:id") do
+  @volunteer = Volunteer.find(params.fetch("id").to_i())
+  @volunteer.delete()
+  @volunteers = Volunteer.all()
+  redirect('/')
+end
