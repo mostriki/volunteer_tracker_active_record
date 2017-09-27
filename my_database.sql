@@ -2,12 +2,11 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.5.3
+-- Dumped by pg_dump version 9.5.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -102,14 +101,14 @@ ALTER SEQUENCE volunteers_id_seq OWNED BY volunteers.id;
 
 
 --
--- Name: projects id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
 --
--- Name: volunteers id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY volunteers ALTER COLUMN id SET DEFAULT nextval('volunteers_id_seq'::regclass);
@@ -127,7 +126,7 @@ COPY projects (id, title) FROM stdin;
 -- Name: projects_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('projects_id_seq', 1, false);
+SELECT pg_catalog.setval('projects_id_seq', 13, true);
 
 
 --
@@ -142,11 +141,11 @@ COPY volunteers (id, name, project_id) FROM stdin;
 -- Name: volunteers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('volunteers_id_seq', 1, false);
+SELECT pg_catalog.setval('volunteers_id_seq', 10, true);
 
 
 --
--- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+-- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY projects
@@ -154,11 +153,21 @@ ALTER TABLE ONLY projects
 
 
 --
--- Name: volunteers volunteers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+-- Name: volunteers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY volunteers
     ADD CONSTRAINT volunteers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: epicodus
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM epicodus;
+GRANT ALL ON SCHEMA public TO epicodus;
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
