@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: volunteer_tracker_development
+
+test:
+  adapter: postgresql
+  database: volunteer_tracker_test

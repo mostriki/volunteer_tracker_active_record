@@ -1,12 +1,7 @@
-require 'sinatra'
-require 'pry'
-require 'sinatra/reloader'
-also_reload '.lib/**/*.rb'
-require './lib/volunteer'
-require './lib/project'
-require 'pg'
+require("bundler/setup")
+Bundler.require(:default)
 
-DB = PG.connect({dbname: 'volunteer_tracker'})
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get ('/') do
   @projects = Project.all
